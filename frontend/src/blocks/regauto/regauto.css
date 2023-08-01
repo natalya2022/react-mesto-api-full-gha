@@ -1,0 +1,5 @@
+.regauto {
+    min-height: calc(100vh - 268px);
+    padding-top: 60px;
+    box-sizing: border-box;
+}

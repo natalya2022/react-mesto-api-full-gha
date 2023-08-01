@@ -1,0 +1,11 @@
+.header__navbar {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    color: #FFFFFF;
+    text-decoration: none;
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+}

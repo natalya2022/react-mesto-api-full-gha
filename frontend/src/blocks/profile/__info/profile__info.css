@@ -1,0 +1,17 @@
+.profile__info {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+}
+
+@media screen and (min-width: 619px) {
+    .profile__info {
+        width: clamp(250px, (100% - 330px), 550px);
+    }
+}
+
+@media screen and (min-width: 880px) {
+    .profile__info {
+        max-width: 550px;
+    }
+}

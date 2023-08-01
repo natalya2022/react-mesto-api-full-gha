@@ -1,0 +1,10 @@
+.photo-grid {
+    margin: 0;
+    padding: 0 19px;
+}
+
+@media screen and (min-width: 880px) {
+    .photo-grid {
+        padding: 0;
+    }
+}

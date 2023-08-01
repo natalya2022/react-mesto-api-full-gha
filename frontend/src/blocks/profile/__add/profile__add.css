@@ -1,0 +1,23 @@
+.profile__add {
+    height: 50px;
+    width: 100%;
+    border: 2px solid #FFFFFF;
+    border-radius: 2px;
+    background: url("./../../../images/plus.svg") no-repeat center center;
+    background-size: 16px;
+    margin-top: 8px;
+    transition: opacity 0.5s;
+}
+
+.profile__add:hover {
+    opacity: .6;
+    cursor: pointer;
+}
+
+@media screen and (min-width: 619px) {
+    .profile__add {
+        background-size: 22px;
+        width: 150px;
+        margin-top: 0;
+    }
+}

@@ -1,0 +1,13 @@
+.photo-grid__places {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0;
+    line-height: 0;
+    display: grid;
+    /* grid-template-columns: repeat(auto-fit, minmax(282px, 1fr)); */
+    grid-template-columns: repeat(auto-fill, minmax(282px, 1fr));
+    row-gap: 20px;
+    column-gap: 17px;
+    max-width: 880px;
+}
