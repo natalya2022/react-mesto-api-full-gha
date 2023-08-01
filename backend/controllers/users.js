@@ -47,9 +47,11 @@ module.exports.createUser = async (req, res, next) => {
     const user = await User.create({
       name, about, avatar, email, password: hash,
     });
-    return res.status(CREATED).send({
-      _id: user._id, email: user.email, name: user.name, about: user.about, avatar: user.avatar,
-    });
+    console.log(user);
+    return res.status(CREATED).send(user);
+    // return res.status(CREATED).send({
+    //   _id: user._id, email: user.email, name: user.name, about: user.about, avatar: user.avatar,
+    // });
   } catch (err) {
     if (err instanceof mongoose.Error.ValidationError) {
       next(new BadRequestError('Ошибка при создании пользователя'));
@@ -97,7 +99,7 @@ module.exports.login = async (req, res, next) => {
     }
     const payload = { _id: user._id };
     const token = generateToken(payload);
-    res.cookie('jwt', token);
+    res.cookie('jwt', token, { httpOnly: true, secure: true, sameSite: true });
     return res.status(OK).send(payload);
   } catch (err) {
     if (err instanceof mongoose.Error.ValidationError) {

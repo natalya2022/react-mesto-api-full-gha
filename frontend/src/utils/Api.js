@@ -17,13 +17,15 @@ export default class Api {
 
   getInitialCards() {
     return this._request(`/cards`, {
-      headers: this._headers
+      credentials: 'include',
+      headers: this._headers,
     });
   }
 
   addNewCard(item) {
     return this._request(`/cards`, {
       method: 'POST',
+      credentials: 'include',
       headers: this._headers,
       body: JSON.stringify({
         name: item.name,
@@ -35,19 +37,22 @@ export default class Api {
   deleteCard(cardId) {
     return this._request(`/cards/${cardId}`, {
       method: 'DELETE',
-      headers: this._headers
+      credentials: 'include',
+      headers: this._headers,
     });
   }
 
   getUserInfo() {
     return this._request(`/users/me`, {
-      headers: this._headers
+      credentials: 'include',
+      headers: this._headers,
     });
   }
 
   editUserProfile({ name, about }) {
     return this._request(`/users/me`, {
       method: 'PATCH',
+      credentials: 'include',
       headers: this._headers,
       body: JSON.stringify({
         name: name,
@@ -59,6 +64,7 @@ export default class Api {
   editUserAvatar({ avatar }) {
     return this._request(`/users/me/avatar`, {
       method: 'PATCH',
+      credentials: 'include',
       headers: this._headers,
       body: JSON.stringify({
         avatar: avatar
@@ -69,7 +75,8 @@ export default class Api {
   likeCard(cardId, like) {
     return this._request(`/cards/${cardId}/likes`, {
       method: like ? 'DELETE' : 'PUT',
-      headers: this._headers
+      credentials: 'include',
+      headers: this._headers,
     });
   }
 }

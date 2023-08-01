@@ -9,6 +9,7 @@ const router = require('./routes/index');
 
 const { PORT = 5000, DB_URL = 'mongodb://127.0.0.1:27017/mestodb' } = process.env;
 const app = express();
+app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -18,7 +19,6 @@ const limiter = rateLimit({
 app.use(limiter);
 app.use(cookies());
 app.use(express.json());
-app.use(cors());
 app.use(helmet());
 
 async function connector() {

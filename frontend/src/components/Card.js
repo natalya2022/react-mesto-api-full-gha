@@ -3,8 +3,10 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 const Card = ({ card, onImagePopup, onCardLike, onCardDelete }) => {
   const currentUser = useContext(CurrentUserContext);
-  const isOwn = card.owner._id === currentUser._id;
-  const isLiked = card.likes.some(i => i._id === currentUser._id);
+  // const isOwn = card.owner._id === currentUser._id;
+  const isOwn = card.owner === currentUser._id;
+  // const isLiked = card.likes.some(i => i._id === currentUser._id);
+  const isLiked = card.likes.some(i => i === currentUser._id);
   const cardLikeButtonClassName = `photo-grid__like ${isLiked && 'photo-grid__like_acltive'}`;
   const handleLikeClick = () => {
     onCardLike(card);

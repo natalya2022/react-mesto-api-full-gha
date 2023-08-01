@@ -40,4 +40,11 @@ const userSchema = new mongoose.Schema({
   },
 });
 
+// eslint-disable-next-line func-names
+userSchema.methods.toJSON = function () {
+  const obj = this.toObject();
+  delete obj.password;
+  return obj;
+};
+
 module.exports = mongoose.model('user', userSchema);

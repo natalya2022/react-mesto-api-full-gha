@@ -91,7 +91,8 @@ function App() {
   };
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    // const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some(i => i === currentUser._id);
     api
       .likeCard(card._id, isLiked)
       .then(newCard => {
@@ -158,7 +159,7 @@ function App() {
     auth
       .authorize(email, password)
       .then(res => {
-        localStorage.setItem('token', res.token);
+        // localStorage.setItem('token', res.token);
         setIsLoggedIn(true);
         setIsUserEmail(email);
         navigate('/');
@@ -176,12 +177,12 @@ function App() {
   }, []);
 
   function handleCheckToken() {
-    if (!localStorage.getItem('token')) {
-      return;
-    }
-    const token = localStorage.getItem('token');
+    // if (!localStorage.getItem('token')) {
+    //   return;
+    // }
+    // const token = localStorage.getItem('token');
     auth
-      .checkToken(token)
+      .checkToken()
       .then(res => {
         setIsLoggedIn(true);
         setIsUserEmail(res.data.email);
@@ -195,7 +196,7 @@ function App() {
 
   function userLogOut() {
     setIsUserEmail('');
-    localStorage.removeItem('token');
+    // localStorage.removeItem('token');
     navigate('/signin');
     setIsLoggedIn(false);
     setCurrentUser({});
