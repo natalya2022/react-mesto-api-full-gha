@@ -4,19 +4,19 @@ const cors = require('cors');
 const cookies = require('cookie-parser');
 const { errors } = require('celebrate');
 const helmet = require('helmet');
-const rateLimit = require('express-rate-limit');
+// const rateLimit = require('express-rate-limit');
 const router = require('./routes/index');
 
 const { PORT = 5000, DB_URL = 'mongodb://127.0.0.1:27017/mestodb' } = process.env;
 const app = express();
 app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 100,
-});
+// const limiter = rateLimit({
+//   windowMs: 15 * 60 * 1000,
+//   max: 100,
+// });
 
-app.use(limiter);
+// app.use(limiter);
 app.use(cookies());
 app.use(express.json());
 app.use(helmet());

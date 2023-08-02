@@ -17,6 +17,8 @@ import InfoTooltip from './InfoTooltip';
 import * as auth from '../utils/auth.js';
 import regfalse from './../images/regfalse.svg';
 import regtrue from './../images/regtrue.svg';
+// import useLocalStorage from "use-local-storage";
+// import useLocalStorageState from 'use-local-storage-state'
 
 function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
@@ -26,7 +28,8 @@ function App() {
   const [imageData, setImageData] = useState({ link: '', name: '' });
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  // const [isLoggedIn, setIsLoggedIn] = useLocalStorage('isLoggedIn', true);
   const [isUserEmail, setIsUserEmail] = useState('');  
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
   const [toooltipMessage, setToooltipMessage] = useState({ link: '', text: '' });  
@@ -37,13 +40,18 @@ function App() {
     {link: regtrue, text: 'Вы успешно зарегистрировались!'},
     {link: regfalse, text: 'Что-то пошло не так! Попробуйте еще раз.'},
   ];
-
-  
+       
   useEffect(() => {
+    handleCheckToken();
+    // eslint-disable-next-line
+  }, []);
+
+   useEffect(() => {
     if (isLoggedIn) {
       api
         .getUserInfo()
         .then(user => {
+          setIsUserEmail(user.email);
           setCurrentUser(user);
         })
         .catch(console.error);
@@ -171,15 +179,16 @@ function App() {
       });
   }
 
-  useEffect(() => {
-    handleCheckToken();
-    // eslint-disable-next-line
-  }, []);
+  // useEffect(() => {
+  //   handleCheckToken();
+  //   // eslint-disable-next-line
+  // }, []);
 
   function handleCheckToken() {
-    // if (!localStorage.getItem('token')) {
-    //   return;
-    // }
+    if (isLoggedIn) { 
+      navigate('/');     
+      return ;
+    }
     // const token = localStorage.getItem('token');
     auth
       .checkToken()
@@ -193,6 +202,7 @@ function App() {
         setIsLoggedIn(false);
       });
   }
+
 
   function userLogOut() {
     setIsUserEmail('');
