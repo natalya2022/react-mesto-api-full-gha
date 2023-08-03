@@ -47,7 +47,6 @@ module.exports.createUser = async (req, res, next) => {
     const user = await User.create({
       name, about, avatar, email, password: hash,
     });
-    console.log(user);
     return res.status(CREATED).send(user);
     // return res.status(CREATED).send({
     //   _id: user._id, email: user.email, name: user.name, about: user.about, avatar: user.avatar,
@@ -112,7 +111,7 @@ module.exports.login = async (req, res, next) => {
 module.exports.logout = async (req, res, next) => {
   try {
     res.clearCookie('jwt');
-    return res.status(OK).send({});
+    return res.status(OK).send({ message: 'logout' });
   } catch (err) {
     next(err);
   }

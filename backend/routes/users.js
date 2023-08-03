@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const {
-  getUsers, getUserId, updateUser, updateAvatar, getUserInfo,
+  getUsers, getUserId, updateUser, updateAvatar, getUserInfo, logout,
 } = require('../controllers/users');
 const {
   validGetUserId,
@@ -12,6 +12,7 @@ const checkAuth = require('../middlewares/auth');
 router.use(checkAuth);
 
 router.get('/', getUsers);
+router.get('/signout', logout);
 router.get('/me', getUserInfo);
 router.get('/:userId', validGetUserId, getUserId);
 router.patch('/me', validUpdateUser, updateUser);

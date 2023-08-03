@@ -17,8 +17,6 @@ import InfoTooltip from './InfoTooltip';
 import * as auth from '../utils/auth.js';
 import regfalse from './../images/regfalse.svg';
 import regtrue from './../images/regtrue.svg';
-// import useLocalStorage from "use-local-storage";
-// import useLocalStorageState from 'use-local-storage-state'
 
 function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
@@ -28,8 +26,7 @@ function App() {
   const [imageData, setImageData] = useState({ link: '', name: '' });
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
-  // const [isLoggedIn, setIsLoggedIn] = useLocalStorage('isLoggedIn', true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);  
   const [isUserEmail, setIsUserEmail] = useState('');  
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
   const [toooltipMessage, setToooltipMessage] = useState({ link: '', text: '' });  
@@ -42,11 +39,6 @@ function App() {
   ];
        
   useEffect(() => {
-    handleCheckToken();
-    // eslint-disable-next-line
-  }, []);
-
-   useEffect(() => {
     if (isLoggedIn) {
       api
         .getUserInfo()
@@ -98,8 +90,7 @@ function App() {
     setIsInfoTooltipOpen(false);
   };
 
-  function handleCardLike(card) {
-    // const isLiked = card.likes.some(i => i._id === currentUser._id);
+  function handleCardLike(card) {   
     const isLiked = card.likes.some(i => i === currentUser._id);
     api
       .likeCard(card._id, isLiked)
@@ -166,8 +157,7 @@ function App() {
   function handleUserLogin(email, password) {
     auth
       .authorize(email, password)
-      .then(res => {
-        // localStorage.setItem('token', res.token);
+      .then(res => {        
         setIsLoggedIn(true);
         setIsUserEmail(email);
         navigate('/');
@@ -179,23 +169,23 @@ function App() {
       });
   }
 
-  // useEffect(() => {
-  //   handleCheckToken();
-  //   // eslint-disable-next-line
-  // }, []);
+  useEffect(() => {    
+    handleCheckToken();
+    // eslint-disable-next-line
+  }, []);
 
   function handleCheckToken() {
     if (isLoggedIn) { 
       navigate('/');     
       return ;
-    }
-    // const token = localStorage.getItem('token');
+    }    
     auth
       .checkToken()
       .then(res => {
         setIsLoggedIn(true);
-        setIsUserEmail(res.data.email);
+        setIsUserEmail(res.email);
         navigate('/');
+        // console.log(isLoggedIn, res);
       })
       .catch(err => {
         console.error(err);
@@ -206,7 +196,7 @@ function App() {
 
   function userLogOut() {
     setIsUserEmail('');
-    // localStorage.removeItem('token');
+    auth.logOut();
     navigate('/signin');
     setIsLoggedIn(false);
     setCurrentUser({});
