@@ -14,6 +14,7 @@ import Login from './Login';
 import Register from './Register';
 import ProtectedRoute from './ProtectedRoute';
 import InfoTooltip from './InfoTooltip';
+import PopupDeleteCard from './PopupDeleteCard';
 import * as auth from '../utils/auth.js';
 import regfalse from './../images/regfalse.svg';
 import regtrue from './../images/regtrue.svg';
@@ -29,7 +30,10 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);  
   const [isUserEmail, setIsUserEmail] = useState('');  
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
-  const [toooltipMessage, setToooltipMessage] = useState({ link: '', text: '' });  
+  const [toooltipMessage, setToooltipMessage] = useState({ link: '', text: '' });
+  const [isDeleteCardPopupOpen, setIsDeleteCardPopupOpen] = useState(false);
+  const [cardForDelete, setCardForDelete] = useState(null);
+
   const navigate = useNavigate();
 
   const toolMessage = { ok: 0, err: 1};
@@ -102,11 +106,17 @@ function App() {
 
   function handleCardDelete(card) {
     api
-      .deleteCard(card._id)
-      .then(newCards => {
-        setCards(cards => cards.filter(c => c._id !== card._id));
+      .deleteCard(cardForDelete._id)
+      .then(() => {
+        setCards(cards => cards.filter(c => c._id !== cardForDelete._id));
+        setIsDeleteCardPopupOpen(false);
       })
       .catch(console.error);
+  }
+
+  function handleCardDeteteRequest(card) {
+    setCardForDelete(card);
+    setIsDeleteCardPopupOpen(true);
   }
 
   function handleUpdateUser(name, about) {
@@ -184,8 +194,7 @@ function App() {
       .then(res => {
         setIsLoggedIn(true);
         setIsUserEmail(res.email);
-        navigate('/');
-        // console.log(isLoggedIn, res);
+        navigate('/');        
       })
       .catch(err => {
         console.error(err);
@@ -228,14 +237,14 @@ function App() {
                         onEditAvatar={handleEditAvatarClick}
                         onImagePopup={handleImagePopupClick}
                         onCardLike={handleCardLike}
-                        onCardDelete={handleCardDelete}
+                        onCardDelete={handleCardDeteteRequest}
                         cards={cards}
                       />
                     }
                   />
                 }
               />
-              <Route path="*" element={<Navigate to="/signin" replace />} />
+              <Route path="*" element={<Navigate to="/signin" replace />} />              
             </Routes>
             <Footer />
           </div>
@@ -264,6 +273,11 @@ function App() {
             onClose={closeAllPopups}           
             toooltipMessage={toooltipMessage}
             isOpen={isInfoTooltipOpen}
+          />
+          <PopupDeleteCard
+            onClose={closeAllPopups}                       
+            isOpen={isDeleteCardPopupOpen}
+            onSubmit={handleCardDelete}
           />
         </div>
       </div>

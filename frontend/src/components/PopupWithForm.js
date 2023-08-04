@@ -10,6 +10,20 @@ const PopupWithForm = ({
   buttonText,
   ...props
 }) => {
+
+  React.useEffect(() => {
+    if(!isOpen) return;
+    const handleEscapeClose = (e) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+    document.addEventListener('keydown', handleEscapeClose);
+    return () => {
+      document.removeEventListener('keydown', handleEscapeClose);
+    };
+  }, [isOpen, onClose]);
+
   return (
     <div className={`popup popup_type_${name} ${isOpen ? 'popup_opened' : ''}`} onClick={onClose}>
       <div className="popup__container" onClick={(e) => e.stopPropagation()}>

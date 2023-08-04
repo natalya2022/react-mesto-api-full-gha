@@ -1,4 +1,4 @@
-import React from 'react';
+ import React from 'react';
 
 const InputUserData = ({ formValue, handleChange }) => {  
 
@@ -11,7 +11,7 @@ const InputUserData = ({ formValue, handleChange }) => {
         id="form-login-email"
         name="email"
         required
-        onChange={handleChange}
+        onChange={handleChange}        
         value={formValue.email || ''}
       />
       <input
@@ -20,10 +20,9 @@ const InputUserData = ({ formValue, handleChange }) => {
         placeholder="Пароль"
         id="form-login-password"
         name="password"
-        minLength={3}
-        maxLength={20}
+        minLength={8}        
         required
-        onChange={handleChange}
+        onChange={handleChange}        
         value={formValue.password || ''}        
       />
     </>

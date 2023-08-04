@@ -19,7 +19,8 @@ const Register = ({ onAddUser }) => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();    
+    e.preventDefault();
+    console.log(formValue.email, formValue.password);    
     onAddUser(formValue.email, formValue.password);
     }
     
