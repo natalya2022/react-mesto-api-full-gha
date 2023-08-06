@@ -83,8 +83,7 @@ export default class Api {
 
 const apiParams = {
   baseUrl: 'http://localhost:5000',
-  headers: {
-    // authorization: 'a2c97fd6-33e2-4a7f-88de-1986c85df645',
+  headers: {   
     'Content-Type': 'application/json'
   }
 };

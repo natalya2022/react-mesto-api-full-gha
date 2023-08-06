@@ -1,6 +1,6 @@
  import React from 'react';
 
-const InputUserData = ({ formValue, handleChange }) => {  
+const InputUserData = ({ formValue, handleChange, errors }) => {  
 
   return (
     <>
@@ -14,6 +14,7 @@ const InputUserData = ({ formValue, handleChange }) => {
         onChange={handleChange}        
         value={formValue.email || ''}
       />
+      <span className="form-place-error regauto__error_visible">{errors.email || ""}</span>
       <input
         className="input-box"
         type="password"
@@ -25,6 +26,7 @@ const InputUserData = ({ formValue, handleChange }) => {
         onChange={handleChange}        
         value={formValue.password || ''}        
       />
+      <span className="form-place-error regauto__error_visible">{errors.password || ""}</span>
     </>
   );
 };

@@ -17,6 +17,7 @@
 @import url("./blocks/regauto/__form/regauto__form.css");
 @import url("./blocks/regauto/__text/regauto__text.css");
 @import url("./blocks/regauto/__link/regauto__link.css");
+@import url("./blocks/regauto/__error_visible/regauto__error_visible.css");
 
 
 @import url("./blocks/input-box/input-box.css");

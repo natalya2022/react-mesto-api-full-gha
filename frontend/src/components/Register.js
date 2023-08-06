@@ -1,35 +1,29 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import InputUserData from './InputUserData';
 import { Link } from 'react-router-dom';
+import { useFormValidation } from '../hooks/useFormValidation';
 
 
 const Register = ({ onAddUser }) => {
+
+  const { values, handleChange, resetForm, errors, isValid } = useFormValidation();
+    
+  useEffect(() => {   
+    resetForm({}, {}, false);
+  }, [resetForm]);
   
-  const [formValue, setFormValue] = useState({
-    email: '',
-    password: ''
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormValue({
-      ...formValue,
-      [name]: value
-    });   
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formValue.email, formValue.password);    
-    onAddUser(formValue.email, formValue.password);
+    console.log(values.email, values.password);    
+    onAddUser(values.email, values.password);
     }
     
   return (
     <div className="regauto">
       <h2 className="regauto__title">Регистрация</h2>
-      <form className="regauto__form" name="form-register" onSubmit={handleSubmit}>
-        <InputUserData handleChange={handleChange} formValue={formValue} />        
-        <button className="regauto__button" type="submit" >
+      <form className="regauto__form" name="form-register" onSubmit={handleSubmit} noValidate>
+        <InputUserData handleChange={handleChange} formValue={values} errors={errors} />        
+        <button className={`regauto__button ${!isValid ? 'popup__save_disabled' : ''}`} type="submit" disabled={!isValid}>
           Зарегистрироваться
         </button>
         <p className="regauto__text">

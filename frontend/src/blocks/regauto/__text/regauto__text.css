@@ -5,5 +5,12 @@
     line-height: 17px;
     text-align: center;
     color: #FFFFFF;
-    margin-top: 15px;
+    margin: 20px auto 0;
+    max-width: 358px;
+}
+
+@media screen and (min-width: 418px) {
+    .regauto__text {
+        margin: 15px auto 0;
+    }
 }

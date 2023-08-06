@@ -2,8 +2,8 @@
     text-decoration: none;
     font-style: normal;
     font-weight: 400;
-    font-size: 18px;
-    line-height: 22px;
+    font-size: 14px;
+    line-height: 17px;
     color: #FFFFFF;
     margin-top: 7px;
     transition: opacity 0.5s;
@@ -12,4 +12,11 @@
 .header__link:hover {
     opacity: .85;
     cursor: pointer;
+}
+
+@media screen and (min-width: 418px) {
+    .header__link {
+        font-size: 18px;
+        line-height: 22px;
+    }
 }

@@ -1,9 +1,17 @@
 .regauto__title {
     font-style: normal;
     font-weight: 900;
-    font-size: 24px;
-    line-height: 29px;
+    font-size: 20px;
+    line-height: 24px;
     text-align: center;
     color: white;
-    margin: 0 auto 47px;
+    margin: 0 auto 38px;
+}
+
+@media screen and (min-width: 418px) {
+    .regauto__title {
+        font-size: 24px;
+        line-height: 29px;
+        margin: 0 auto 47px;
+    }
 }

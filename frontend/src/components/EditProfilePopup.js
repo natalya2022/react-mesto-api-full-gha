@@ -1,30 +1,24 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import PopupWithForm from './PopupWithForm';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
+import { useFormValidation } from '../hooks/useFormValidation';
 
 const EditProfilePopup = ({ isOpen, onClose, onUpdateUser }) => {
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
+  
   const currentUser = useContext(CurrentUserContext);
+  const { values, handleChange, resetForm, errors, isValid } = useFormValidation();
 
   useEffect(() => {
-    setName(currentUser.name);
-    setDescription(currentUser.about);
-  }, [currentUser, isOpen]);
-
-  function handleChangeName(e) {
-    setName(e.target.value);
-  }
-
-  function handleChangeDescription(e) {
-    setDescription(e.target.value);
-  }
+    if (currentUser) {
+      resetForm(currentUser, {}, true);
+    }
+  }, [currentUser, resetForm, isOpen]);
 
   function handleSubmit(e) {
-    e.preventDefault();
+    e.preventDefault();    
     onUpdateUser({
-      name,
-      about: description
+      name: values.name,
+      about: values.about,
     });
   }
 
@@ -35,10 +29,11 @@ const EditProfilePopup = ({ isOpen, onClose, onUpdateUser }) => {
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
+      isDisabled={!isValid} 
     >
       <div className="popup__fill">
         <input
-          className="popup__input popup__text popup__text_position_first-line popup__text_field_name"
+          className={`popup__input popup__text popup__text_position_first-line popup__text_field_name ${!isValid && "popup__input_type_error"}`}
           type="text"
           placeholder="Имя"
           id="form-name"
@@ -46,23 +41,23 @@ const EditProfilePopup = ({ isOpen, onClose, onUpdateUser }) => {
           required
           minLength={2}
           maxLength={40}
-          value={name || ''}
-          onChange={handleChangeName}
+          value={values.name || ''}
+          onChange={handleChange}
         />
-        <span className="form-name-error" />
+        <span className="form-name-error popup__error_visible">{errors.name || ""}</span>
         <input
-          className="popup__input popup__text popup__text_position_second-line popup__text_field_occupation"
+          className={`popup__input popup__text popup__text_position_second-line popup__text_field_occupation ${!isValid && "popup__input_type_error"}`}
           type="text"
           placeholder="Занятие"
           id="form-job"
           name="about"
           required
           minLength={2}
-          maxLength={200}
-          value={description || ''}
-          onChange={handleChangeDescription}
+          maxLength={200}                  
+          value={values.about || ''}
+          onChange={handleChange}
         />
-        <span className="form-job-error" />
+        <span className="form-job-error popup__error_visible">{errors.about || ""}</span>
       </div>
     </PopupWithForm>
   );

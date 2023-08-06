@@ -8,6 +8,7 @@ const PopupWithForm = ({
   onClose,
   onSubmit,
   buttonText,
+  isDisabled=false,  
   ...props
 }) => {
 
@@ -29,9 +30,9 @@ const PopupWithForm = ({
       <div className="popup__container" onClick={(e) => e.stopPropagation()}>
         <h2 className="popup__title">{title}</h2>
         <button className="popup__close" type="button" aria-label="Закрыть" onClick={onClose} />
-        <form className="popup__edit" name={name} onSubmit={onSubmit}>
+        <form className="popup__edit" name={name} onSubmit={onSubmit} noValidate>
           {children}
-          <button className="popup__save popup__save_style" type="submit">
+          <button className={`popup__save popup__save_style ${isDisabled ? 'popup__save_disabled' : ''}`} type="submit" disabled={isDisabled}>
             {buttonText || 'Сохранить'}
           </button>
         </form>
