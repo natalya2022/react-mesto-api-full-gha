@@ -1,0 +1,18 @@
+.header__menu-open .header__navbar {
+    display: flex;
+}
+
+.header__menu-open .header__burger {
+    width: 20px;
+    height: 20px;
+    background: transparent url('../../../images/close_icon.svg') center no-repeat;
+    background-size: 20px 20px;
+    right: 30px;
+    bottom: 30px;
+}
+
+@media screen and (max-width: 618px) {
+    .header__menu-open {
+        padding: 170px 30px 0;
+    }
+}

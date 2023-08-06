@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useFormValidation } from '../hooks/useFormValidation';
 
 
-const Register = ({ onAddUser }) => {
+const Register = ({ onAddUser, isSending }) => {
 
   const { values, handleChange, resetForm, errors, isValid } = useFormValidation();
     
@@ -23,8 +23,8 @@ const Register = ({ onAddUser }) => {
       <h2 className="regauto__title">Регистрация</h2>
       <form className="regauto__form" name="form-register" onSubmit={handleSubmit} noValidate>
         <InputUserData handleChange={handleChange} formValue={values} errors={errors} />        
-        <button className={`regauto__button ${!isValid ? 'popup__save_disabled' : ''}`} type="submit" disabled={!isValid}>
-          Зарегистрироваться
+        <button className={`regauto__button ${(!isValid || isSending) ? 'popup__save_disabled' : ''}`} type="submit" disabled={!isValid || isSending} >
+        {isSending ? 'Регистрация...' : 'Зарегистрироваться'}
         </button>
         <p className="regauto__text">
           Уже зарегистрированы?&nbsp;

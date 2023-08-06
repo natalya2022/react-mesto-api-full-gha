@@ -33,6 +33,13 @@ function App() {
   const [toooltipMessage, setToooltipMessage] = useState({ link: '', text: '' });
   const [isDeleteCardPopupOpen, setIsDeleteCardPopupOpen] = useState(false);
   const [cardForDelete, setCardForDelete] = useState(null);
+  const [isUserSending, setIsUserSending] = useState(false);
+  const [isUserAvatarSending, setIsUserAvatarSending] = useState(false);
+  const [isAddPlaceSending, setIsAddPlaceSending] = useState(false);
+  const [isDeleteCardSending, setIsDeleteCardSending] = useState(false);
+  const [isLoginSending, setIsLoginSending] = useState(false);
+  const [isRegisterSending, setIsRegisterSending] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -105,13 +112,15 @@ function App() {
   }
 
   function handleCardDelete(card) {
+    setIsDeleteCardSending(true);
     api
       .deleteCard(cardForDelete._id)
       .then(() => {
         setCards(cards => cards.filter(c => c._id !== cardForDelete._id));
         setIsDeleteCardPopupOpen(false);
       })
-      .catch(console.error);
+      .catch(console.error)
+      .finally(() => setIsDeleteCardSending(false));
   }
 
   function handleCardDeteteRequest(card) {
@@ -120,36 +129,43 @@ function App() {
   }
 
   function handleUpdateUser(name, about) {
+    setIsUserSending(true);
     api
       .editUserProfile(name, about)
       .then(userData => {
         setCurrentUser(userData);
         closeAllPopups();
       })
-      .catch(console.error);
+      .catch(console.error)
+      .finally(() => setIsUserSending(false));
   }
 
   function handleAddPlaceSubmit(item) {
+    setIsAddPlaceSending(true);
     api
       .addNewCard(item)
       .then(newCard => {
         setCards([newCard, ...cards]);
         closeAllPopups();
       })
-      .catch(console.error);
+      .catch(console.error)
+      .finally(() => setIsAddPlaceSending(false));
   }
 
   function handleUpdateAvatar(avatar) {
+    setIsUserAvatarSending(true);
     api
       .editUserAvatar(avatar)
       .then(userData => {
         setCurrentUser(userData);
         closeAllPopups();
       })
-      .catch(console.error);
+      .catch(console.error)
+      .finally(() => setIsUserAvatarSending(false));
   }
 
   function handleNewUserReg(email, password) {
+    setIsRegisterSending(true);
     auth
       .register(email, password)
       .then(res => {
@@ -161,10 +177,12 @@ function App() {
         console.error(err);        
         setToooltipMessage(toolMessages[toolMessage.err]);
         handleInfoTooltipOpen();
-      });
+      })
+      .finally(() => setIsRegisterSending(false));
   }
 
   function handleUserLogin(email, password) {
+    setIsLoginSending(true);
     auth
       .authorize(email, password)
       .then(res => {        
@@ -176,7 +194,8 @@ function App() {
         console.error(err);        
         setToooltipMessage(toolMessages[toolMessage.err]);
         handleInfoTooltipOpen();
-      });
+      })
+      .finally(() => setIsLoginSending(false));
   }
 
   useEffect(() => {    
@@ -210,10 +229,15 @@ function App() {
     setIsLoggedIn(false);
     setCurrentUser({});
     setCards([]);
+    setIsMobileMenuOpen(false);
   }
 
   function handleInfoTooltipOpen() {
     setIsInfoTooltipOpen(true);
+  }
+
+  function toggleMenu() {
+    setIsMobileMenuOpen(!isMobileMenuOpen);    
   }
 
   return (
@@ -221,10 +245,10 @@ function App() {
       <div className="root">
         <div className="page">
           <div className="wrap">
-            <Header loggedIn={isLoggedIn} userEmail={isUserEmail} onLogOut={userLogOut} />
+            <Header loggedIn={isLoggedIn} userEmail={isUserEmail} onLogOut={userLogOut} mobileMenuOpen={isMobileMenuOpen} toggleMenu={toggleMenu}/>
             <Routes>
-              <Route path="/signup" element={<Register onAddUser={handleNewUserReg} />} />
-              <Route path="/signin" element={<Login onUserLogin={handleUserLogin} />} />
+              <Route path="/signup" element={<Register onAddUser={handleNewUserReg} isSending={isRegisterSending} />} />
+              <Route path="/signin" element={<Login onUserLogin={handleUserLogin} isSending={isLoginSending}/>} />
               <Route
                 path="/"
                 element={
@@ -252,16 +276,19 @@ function App() {
             isOpen={isEditProfilePopupOpen}
             onClose={closeAllPopups}
             onUpdateUser={handleUpdateUser}
+            isSending={isUserSending}
           />
           <EditAvatarPopup
             isOpen={isEditAvatarPopupOpen}
             onClose={closeAllPopups}
             onUpdateAvatar={handleUpdateAvatar}
+            isSending={isUserAvatarSending}
           />
           <AddPlacePopup
             isOpen={isAddPlacePopupOpen}
             onClose={closeAllPopups}
             onAddPlace={handleAddPlaceSubmit}
+            isSending={isAddPlaceSending}
           />
           <ImagePopup
             link={imageData.link}
@@ -278,6 +305,7 @@ function App() {
             onClose={closeAllPopups}                       
             isOpen={isDeleteCardPopupOpen}
             onSubmit={handleCardDelete}
+            isSending={isDeleteCardSending}
           />
         </div>
       </div>

@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import PopupWithForm from './PopupWithForm';
 import { useFormValidation } from '../hooks/useFormValidation';
 
-const EditAvatarPopup = ({ isOpen, onClose, onUpdateAvatar }) => {
+const EditAvatarPopup = ({ isOpen, onClose, onUpdateAvatar, isSending }) => {
   const userAvatarRef = useRef();
   const { values, handleChange, resetForm, errors, isValid } = useFormValidation();
 
@@ -26,7 +26,8 @@ const EditAvatarPopup = ({ isOpen, onClose, onUpdateAvatar }) => {
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
-      isDisabled={!isValid}
+      buttonText={isSending ? 'Сохранение...' : 'Сохранить'}
+      isDisabled={!isValid || isSending}
     >
       <div className="popup__fill">
         <input

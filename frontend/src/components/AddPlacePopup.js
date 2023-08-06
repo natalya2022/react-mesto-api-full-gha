@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import PopupWithForm from './PopupWithForm';
 import { useFormValidation } from '../hooks/useFormValidation';
 
-const AddPlacePopup = ({ isOpen, onClose, onAddPlace }) => {
+const AddPlacePopup = ({ isOpen, onClose, onAddPlace, isSending }) => {
   
   const { values, handleChange, resetForm, errors, isValid } = useFormValidation();
 
@@ -23,10 +23,10 @@ const AddPlacePopup = ({ isOpen, onClose, onAddPlace }) => {
       title={'Новое место'}
       name={'place'}
       isOpen={isOpen}
-      onClose={onClose}
-      buttonText={'Создать'}
+      onClose={onClose}      
       onSubmit={handleSubmit}
-      isDisabled={!isValid}      
+      buttonText={isSending ? 'Сохранение...' : 'Создать'}
+      isDisabled={!isValid || isSending}      
     >
       <div className="popup__fill">
         <input

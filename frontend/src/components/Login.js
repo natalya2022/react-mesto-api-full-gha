@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import InputUserData from './InputUserData';
 import { useFormValidation } from '../hooks/useFormValidation';
 
-const Login = ({ onUserLogin }) => {
+const Login = ({ onUserLogin, isSending }) => {
 
   const { values, handleChange, resetForm, errors, isValid } = useFormValidation();
   
@@ -20,8 +20,8 @@ const Login = ({ onUserLogin }) => {
       <h2 className="regauto__title">Вход</h2>
       <form className="regauto__form" name="form-login" onSubmit={handleSubmit} noValidate>
       <InputUserData handleChange={handleChange} formValue={values} errors={errors} />
-        <button className={`regauto__button ${!isValid ? 'popup__save_disabled' : ''}`} type="submit" disabled={!isValid}>
-          Войти
+        <button className={`regauto__button ${(!isValid || isSending) ? 'popup__save_disabled' : ''}`} type="submit" disabled={!isValid || isSending} >
+        {isSending ? 'Авторизация...' : 'Войти'}
         </button>
       </form>
     </div>
