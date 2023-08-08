@@ -1,0 +1,16 @@
+.regauto__text {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: #FFFFFF;
+    margin: 20px auto 0;
+    max-width: 358px;
+}
+
+@media screen and (min-width: 418px) {
+    .regauto__text {
+        margin: 15px auto 0;
+    }
+}

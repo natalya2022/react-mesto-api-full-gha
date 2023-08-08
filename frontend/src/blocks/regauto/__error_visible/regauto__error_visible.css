@@ -1,0 +1,19 @@
+.regauto__error_visible {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    color: #FF0000;
+    display: inline-block;
+    min-height: 25px;
+    margin: auto;
+    padding: 0;
+    width: 100%;
+}
+
+@media screen and (min-width: 418px) {
+    .regauto__error_visible {
+        max-width: 358px;
+        /* font-size: 14px; */
+    }
+}

@@ -1,0 +1,9 @@
+.photo-grid__rectangle {
+    margin: 0;
+    padding: 0 21px;
+    height: 79px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 5px;
+}

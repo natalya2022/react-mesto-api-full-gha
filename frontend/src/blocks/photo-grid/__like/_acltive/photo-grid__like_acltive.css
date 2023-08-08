@@ -1,0 +1,4 @@
+.photo-grid__like_acltive {
+    background: url("./../../../../images/like_black.svg") no-repeat center center;
+    background-size: contain;
+}

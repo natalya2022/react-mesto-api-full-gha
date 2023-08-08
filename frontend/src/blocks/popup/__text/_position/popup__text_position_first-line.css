@@ -1,0 +1,9 @@
+.popup__text_position_first-line {
+    height: 39px;
+}
+
+@media screen and (min-width: 619px) {
+    .popup__text_position_first-line {
+        height: 36px;
+    }
+}

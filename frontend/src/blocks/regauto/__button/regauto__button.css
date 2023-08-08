@@ -1,0 +1,34 @@
+.regauto__button {
+    /* width: 260px; */
+    width: 100%;
+    height: 46px;
+    background-color: white;
+    border-radius: 2px;
+    padding: 0;
+    margin: 142px auto 0;
+    border: 0;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: black;
+    transition: opacity 0.5s;
+    display: block;
+}
+
+.regauto__button:hover {
+    opacity: .85;
+    cursor: pointer;
+}
+
+@media screen and (min-width: 418px) {
+    .regauto__button {
+        max-width: 358px;
+        height: 50px;
+        font-size: 18px;
+        line-height: 22px;
+        margin: 186px auto 0;
+    }
+}

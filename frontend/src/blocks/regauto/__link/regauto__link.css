@@ -1,0 +1,15 @@
+.regauto__link {
+    text-decoration: none;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: #FFFFFF;
+    transition: opacity 0.5s;
+}
+
+.regauto__link:hover {
+    opacity: .6;
+    cursor: pointer;
+}
