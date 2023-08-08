@@ -82,7 +82,7 @@ export default class Api {
 }
 
 const apiParams = {
-  baseUrl: 'https://places.nomoreparties.co',
+  baseUrl: 'https://api.places.nomoreparties.co',
   // baseUrl: 'http://localhost:3000',
   headers: {   
     'Content-Type': 'application/json'
