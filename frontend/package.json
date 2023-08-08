@@ -25,8 +25,7 @@
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
-  },
-  "homepage": "https://natalya2022.github.io/react-mesto-auth/",
+  },  
   "eslintConfig": {
     "extends": [
       "react-app",

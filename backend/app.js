@@ -12,7 +12,7 @@ const { PORT = 3000, DB_URL = 'mongodb://127.0.0.1:27017/mestodb' } = process.en
 const app = express();
 // app.use(cors({ origin: true, credentials: true }));
 // app.use(cors({ origin: 'https://places.nomoreparties.co:3001', credentials: true }));
-app.use(cors({ origin: 'http://localhost:3001', credentials: true }));
+app.use(cors({ origin: ['http://localhost:3001', 'https://places.nomoreparties.co'], credentials: true }));
 
 // const limiter = rateLimit({
 //   windowMs: 15 * 60 * 1000,
