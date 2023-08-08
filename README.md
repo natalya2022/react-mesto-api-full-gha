@@ -12,4 +12,4 @@
 IP-адрес 158.160.55.34
 
 Frontend https://places.nomoreparties.co
-Backend https://https://api.places.nomoreparties.co
+Backend https://api.places.nomoreparties.co
