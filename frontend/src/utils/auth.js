@@ -1,4 +1,5 @@
-export const BASE_URL = 'http://localhost:5000';
+//export const BASE_URL = 'http://localhost:3000';
+export const BASE_URL = 'https://api.places.nomoreparties.co:3000';
 
 function checkRequest(res) {
     if (res.ok) {
