@@ -1,9 +1,9 @@
 const JWT = require('jsonwebtoken');
 
-const SECRET_KEY = 'super-strong-secret';
+// const SECRET_KEY = 'super-strong-secret';
 
 function generateToken(payload) {
-  return JWT.sign(payload, SECRET_KEY, {
+  return JWT.sign(payload, process.env.SECRET_KEY, {
     expiresIn: '7d',
   });
 }
@@ -13,7 +13,7 @@ function checkToken(token) {
     return false;
   }
   try {
-    return JWT.verify(token, SECRET_KEY);
+    return JWT.verify(token, process.env.SECRET_KEY);
   } catch (err) {
     return false;
   }

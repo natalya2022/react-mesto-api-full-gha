@@ -1,5 +1,4 @@
 //export const BASE_URL = 'http://localhost:3000';
-// export const BASE_URL = process.env.windir ? 'http://localhost:3000' : 'https://api.places.nomoreparties.co';
 export const BASE_URL = 'https://api.places.nomoreparties.co';
 
 function checkRequest(res) {
