@@ -9,7 +9,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 158.160.55.34
+IP-адрес 51.250.89.161
 
 Frontend https://places.nomoreparties.co
 Backend https://api.places.nomoreparties.co
