@@ -11,7 +11,7 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 console.log(process.env);
 
-const { PORT, DB_URL } = process.env;
+const { PORT = 3000, DB_URL = 'mongodb://127.0.0.1:27017/mestodb' } = process.env;
 const app = express();
 // app.use(cors({ origin: true, credentials: true }));
 // app.use(cors({ origin: 'https://places.nomoreparties.co:3001', credentials: true }));
