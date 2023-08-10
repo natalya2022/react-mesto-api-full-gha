@@ -1,8 +1,7 @@
 export default class Api {
   constructor(apiParams) {
     this._baseUrl = apiParams.baseUrl;
-    this._headers = apiParams.headers;
-    // console.log(process.env.NODE_ENV === 'production');
+    this._headers = apiParams.headers;    
   }
 
   _checkRequest(res) {
@@ -83,8 +82,7 @@ export default class Api {
 }
 
 const apiParams = {
-  baseUrl: process.env.NODE_ENV === 'production' ? 'https://api.places.nomoreparties.co' : 'http://localhost:3000',  
-  // baseUrl: 'https://api.places.nomoreparties.co',
+  baseUrl: process.env.NODE_ENV === 'production' ? 'https://api.places.nomoreparties.co' : 'http://localhost:3000',    
   headers: {   
     'Content-Type': 'application/json'
   }

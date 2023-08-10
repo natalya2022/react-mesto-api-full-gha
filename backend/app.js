@@ -5,7 +5,7 @@ const cors = require('cors');
 const cookies = require('cookie-parser');
 const { errors } = require('celebrate');
 const helmet = require('helmet');
-// const rateLimit = require('express-rate-limit');
+const rateLimit = require('express-rate-limit');
 const router = require('./routes/index');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
@@ -13,16 +13,14 @@ console.log(process.env.IS_SERVER);
 
 const { PORT = 3000, DB_URL = 'mongodb://127.0.0.1:27017/mestodb' } = process.env;
 const app = express();
-// app.use(cors({ origin: true, credentials: true }));
-// app.use(cors({ origin: 'https://places.nomoreparties.co', credentials: true }));
 app.use(cors({ origin: ['http://localhost:3001', 'https://places.nomoreparties.co'], credentials: true }));
 
-// const limiter = rateLimit({
-//   windowMs: 15 * 60 * 1000,
-//   max: 100,
-// });
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+});
 
-// app.use(limiter);
+app.use(limiter);
 app.use(cookies());
 app.use(express.json());
 app.use(helmet());
@@ -40,6 +38,11 @@ connector()
 
 app.use(requestLogger);
 
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
 app.use(router);
 
 app.use(errorLogger);
