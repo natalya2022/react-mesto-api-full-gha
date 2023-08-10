@@ -48,9 +48,6 @@ module.exports.createUser = async (req, res, next) => {
       name, about, avatar, email, password: hash,
     });
     return res.status(CREATED).send(user);
-    // return res.status(CREATED).send({
-    //   _id: user._id, email: user.email, name: user.name, about: user.about, avatar: user.avatar,
-    // });
   } catch (err) {
     if (err instanceof mongoose.Error.ValidationError) {
       next(new BadRequestError('Ошибка при создании пользователя'));
