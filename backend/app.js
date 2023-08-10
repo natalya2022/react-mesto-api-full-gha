@@ -9,8 +9,6 @@ const rateLimit = require('express-rate-limit');
 const router = require('./routes/index');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
-console.log(process.env.IS_SERVER);
-
 const { PORT = 3000, DB_URL = 'mongodb://127.0.0.1:27017/mestodb' } = process.env;
 const app = express();
 app.use(cors({ origin: ['http://localhost:3001', 'https://places.nomoreparties.co'], credentials: true }));
